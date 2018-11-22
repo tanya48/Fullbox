@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+    <constant name="struts.devMode" value="true" />
+    <constant name="struts.configuration.xml.reload" value="true" />
+  
+    <package name="strutsbasico" extends="struts-default">
+        <action name="index" class="mx.itesm.fullbox.actions.Registro" method="execute">
+            <result name="success">/index.jsp</result>
+            <result name="error">/signup.jsp</result>
+        </action>
+        <action name="Login" class="mx.itesm.fullbox.actions.Login" method="execute">
+            <result name="success">/Login.jsp</result>
+            <result name="error">/index.jsp</result>
+        </action>
+        <action name="signup">
+            <result name="success">/signup.jsp</result>
+        </action>
+    </package>
+</struts>
