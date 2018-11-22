@@ -11,6 +11,8 @@
 	<meta charset="utf-8" />
 	<link rel="icon" type="image/png" href="assets/img/favicon.ico">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <link rel="stylesheet" href="css/dropzone.css"/>
+        <script type="text/javascript" src="js/dropzone.js"></script>
 
 	<title>Light Bootstrap Dashboard by Creative Tim</title>
 
@@ -187,6 +189,22 @@
                                         <i class="fa fa-clock-o"></i> Campaign sent 2 days ago
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-8">
+                        <div class="card">
+                            <div class="header">
+                                <h4 class="title">Drag n' Drop</h4>
+                                <p class="category">Tryout</p>
+                            </div>
+                            <div class="content">
+                                <form action="/file-upload" class="dropzone">
+                                    <div class="fallback">
+                                      <input name="file" type="file" multiple />
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
