@@ -19,5 +19,9 @@
         <action name="signup">
             <result name="success">/signup.jsp</result>
         </action>
+        <action name="regresa" class="mx.itesm.fullbox.actions.Registro" method="regresar">
+            <result name="success">/index.jsp</result>
+        </action>
+        
     </package>
 </struts>

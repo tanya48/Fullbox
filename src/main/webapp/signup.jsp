@@ -54,7 +54,7 @@
                     </div>
                     <div class="signup-image">
                         <figure><img src="images/cereza.jpeg" alt="sing up image"></figure>
-                        <a href="<s:url action='index'/>" class="signup-image-link">I am already member</a>
+                        <a href="<s:url action='regresa'/>" class="signup-image-link">I am already member</a>
                     </div>
                 </div>
             </div>

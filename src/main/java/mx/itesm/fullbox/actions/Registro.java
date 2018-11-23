@@ -46,10 +46,17 @@ public class Registro extends ActionSupport {
     public void setPass(String pass) {
         this.pass = pass;
     }
+    
+    public String regresar()
+    {
+        return SUCCESS;
+    }
 
     @Override
     public String execute() throws Exception {
+        System.out.print("ENTRE AL EXECUTE");
         if (!email.isEmpty() && !name.isEmpty() && !pass.isEmpty()) {
+            System.out.print("ENTRE AL IF");
             try {
                 Connection conn = Conexion.getConexion();
                 String emailsql = "SELECT * FROM Cuenta WHERE email = ?";
@@ -74,7 +81,7 @@ public class Registro extends ActionSupport {
                     while (rs.next()) {
                         idUsuario = rs.getInt("idUsuarios");
                     }
-                    String sql3 = "INSERT INTO Cuenta(email, password, fk_idusuarios) VALUES(?,?,?)";
+                    String sql3 = "INSERT INTO Cuenta(email, password, fk_idusuarios) VALUES(?,SHA(?),?)";
                     ps = conn.prepareStatement(sql3);
                     ps.setString(1, email);
                     ps.setString(2, pass);
