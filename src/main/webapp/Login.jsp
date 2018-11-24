@@ -14,7 +14,6 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
         <link rel="stylesheet" href="css/dropzone.css"/>
         <script type="text/javascript" src="js/dropzone.js"></script>
-
         <title>Welcome </title>
 
         <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
@@ -86,7 +85,8 @@
                             <ul class="nav navbar-nav navbar-right">
                                 <li>
                                     <a href="<s:url action='regresa'/>">
-                                        <p>Log out</p>
+                                        <i class="fa fa-user"></i>
+                                        <i class="fa-user-circle">Log out</i>
                                     </a>
                                 </li>
                                 <li class="separator hidden-lg"></li>
@@ -102,7 +102,7 @@
                             <div class="col-md-8">
                                 <div class="card">
                                     <div class="header">
-                                        <h4 class="title">Drag n' Drop</h4>
+                                        <h4 class="title">Arrastra o selecciona tus archivos</h4>
                                         <p class="category">Tryout</p>
                                     </div>
                                     <div class="content">
