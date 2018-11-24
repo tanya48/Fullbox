@@ -12,8 +12,11 @@
         <meta charset="utf-8" />
         <link rel="icon" type="image/png" href="assets/img/favicon.ico">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-        <link rel="stylesheet" href="css/dropzone.css"/>
+        <link rel="stylesheet" href="css/basic.min.css"/>
+        <link rel="stylesheet" href="css/dropzone.min.css"/>
         <script type="text/javascript" src="js/dropzone.js"></script>
+        <script type="text/javascript" src="js/dropzone.min.js"></script>
+
         <title>Welcome </title>
 
         <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
@@ -102,14 +105,10 @@
                             <div class="col-md-8">
                                 <div class="card">
                                     <div class="header">
-                                        <h4 class="title">Arrastra o selecciona tus archivos</h4>
-                                        <p class="category">Tryout</p>
+                                        <h4 class="title">Mis archivos</h4>
                                     </div>
                                     <div class="content">
                                         <form action="/file-upload" class="dropzone">
-                                            <div class="fallback">
-                                                <input name="file" type="file" multiple />
-                                            </div>
                                         </form>
                                     </div>
                                 </div>
