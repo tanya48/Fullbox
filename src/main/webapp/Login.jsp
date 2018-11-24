@@ -15,7 +15,6 @@
         <link rel="stylesheet" href="css/basic.min.css"/>
         <link rel="stylesheet" href="css/dropzone.min.css"/>
         <script type="text/javascript" src="js/dropzone.js"></script>
-        <script type="text/javascript" src="js/dropzone.min.js"></script>
 
         <title>Welcome </title>
 
@@ -108,9 +107,9 @@
                                         <h4 class="title">Mis archivos</h4>
                                     </div>
                                     <div class="content">
-                                        <form action="fileup" class="dropzone" id="dropzone">
+                                        <form action="fileup" method ="POST" class="dropzone" id="dropzone" enctype="multipart/form-data">
                                             <div class="fallback">
-                                                <input type="file" name="file" multiple id="archivos"/>
+                                                <s:file name="file" label="Select a File to upload" size="40" />
                                             </div>
                                         </form>
                                     </div>

@@ -81,7 +81,7 @@ public class Registro extends ActionSupport {
                     while (rs.next()) {
                         idUsuario = rs.getInt("idUsuarios");
                     }
-                    String sql3 = "INSERT INTO Cuenta(email, password, fk_idusuarios) VALUES(?,SHA(?),?)";
+                    String sql3 = "INSERT INTO Cuenta(email, password, fk_idusuarios) VALUES(?,?,?)";
                     ps = conn.prepareStatement(sql3);
                     ps.setString(1, email);
                     ps.setString(2, pass);
