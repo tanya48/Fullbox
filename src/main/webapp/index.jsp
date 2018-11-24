@@ -38,7 +38,7 @@
                         <form action="Login" method="POST" class="register-form" id="login-form">
                             <div class="form-group">
                                 <label for="your_email"><i class="zmdi zmdi-account material-icons-name"></i></label>
-                                <s:param name="your_email"><input type="text" name="your_email" id="your_name" placeholder="Your Email"/></s:param>
+                                <input type="text" name="your_email" id="your_name" placeholder="Your Email"/>
                             </div>
                             <div class="form-group">
                                 <label for="your_pass"><i class="zmdi zmdi-lock"></i></label>
