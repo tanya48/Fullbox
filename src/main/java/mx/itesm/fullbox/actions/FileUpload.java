@@ -8,28 +8,50 @@ package mx.itesm.fullbox.actions;
 import static com.opensymphony.xwork2.Action.ERROR;
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import com.opensymphony.xwork2.ActionSupport;
+import com.opensymphony.xwork2.config.entities.Parameterizable;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.Part;
 import mx.itesm.fullbox.utils.Conexion;
+import org.apache.commons.io.FilenameUtils;
 
 /**
  *
  * @author tanya
  */
-public class FileUpload extends ActionSupport {
+public class FileUpload extends ActionSupport{
 
       private File file;
       private String fileContentType;
       private String fileFileName;
-      private String fileFileSize;
-      private String fileextension;
-      private InputStream fileFileData;
+      private int fileFileSize;
+      private String fileFileType;
+      private String your_email;
+
+    public String getFileFileType() {
+        return fileFileType;
+    }
+
+    public void setFileFileType(String fileFileType) {
+        this.fileFileType = fileFileType;
+    }
+
+    public String getYour_email() {
+        return your_email;
+    }
+
+    public void setYour_email(String your_email) {
+        this.your_email = your_email;
+    }
+      
+      
 
     public File getFile() {
         return file;
@@ -55,31 +77,14 @@ public class FileUpload extends ActionSupport {
         this.fileFileName = fileFileName;
     }
 
-    public String getFileFileSize() {
+    public int getFileFileSize() {
         return fileFileSize;
     }
 
-    public void setFileFileSize(String fileFileSize) {
+    public void setFileFileSize(int fileFileSize) {
         this.fileFileSize = fileFileSize;
     }
-
-    public String getFileextension() {
-        return fileextension;
-    }
-
-    public void setFileextension(String fileextension) {
-        this.fileextension = fileextension;
-    }
-
-    public InputStream getFileFileData() {
-        return fileFileData;
-    }
-
-    public void setFileFileData(InputStream fileFileData) {
-        this.fileFileData = fileFileData;
-    }
-      
-      
+       
       
   
     @Override
@@ -90,28 +95,29 @@ public class FileUpload extends ActionSupport {
                 Connection conn = Conexion.getConexion();
                 String emailsql = "SELECT idcuenta FROM Cuenta WHERE email = ?";
                 PreparedStatement pss = conn.prepareStatement(emailsql);
+                Login log = new Login();
+                System.out.print(your_email);
+                //pss.setString(1, log.getYour_email());
                 pss.setString(1, "A0122091@itesm.mx");
                 ResultSet rs = pss.executeQuery();
-                System.out.print("ENTRE AL IDDDD");
+                
                 if (rs.next()) {
-                    System.out.print("ENTRE AL FFFF");
-                    System.out.print(fileFileName);
                     System.out.print("ENTRE AL FFFF");
                     int id = rs.getInt("idcuenta");
                     String sql = "INSERT INTO archivo(nombre, tipo, extension, tamaño, contenido, fk_idfolder, fk_idcuenta) VALUES(?,?,?,?,?,?,?)";
                     PreparedStatement ps = conn.prepareStatement(sql);
                     ps.setString(1, fileFileName);
                     ps.setString(2, fileContentType);
-                    ps.setString(3, "png");
-                    ps.setString(4, fileFileSize);
-                    ps.setBinaryStream(5, fileFileData);
+                    ps.setString(3, FilenameUtils.getExtension(fileFileName));
+                    ps.setLong(4, file.length());
+                    FileInputStream is = new FileInputStream(file);
+                    ps.setBinaryStream(5, is);
                     ps.setInt(6, 1);
                     ps.setInt(7, id);
                     ps.execute();
                     //el binaryStream almacena bytes, con java obtienes el inputstream.
                     return SUCCESS;
                 } else {
-                   
                     return ERROR;
                 }
             } catch (Exception ex) {
@@ -119,6 +125,4 @@ public class FileUpload extends ActionSupport {
             }
         return ERROR; //To change body of generated methods, choose Tools | Templates.
     }
-    
-    
 }
