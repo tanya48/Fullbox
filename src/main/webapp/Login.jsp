@@ -108,7 +108,10 @@
                                         <h4 class="title">Mis archivos</h4>
                                     </div>
                                     <div class="content">
-                                        <form action="/file-upload" class="dropzone">
+                                        <form action="fileup" class="dropzone" id="dropzone">
+                                            <div class="fallback">
+                                                <input type="file" name="file" multiple id="archivos"/>
+                                            </div>
                                         </form>
                                     </div>
                                 </div>
