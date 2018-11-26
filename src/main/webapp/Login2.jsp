@@ -125,6 +125,16 @@
                                                 <s:iterator  value="list">
                                                     <tr>
                                                         <td><s:property value="fileFileName" /></td>  
+                                                        <td>
+                                                            <form action="descarga">
+                                                                <input type="hidden"  name="fn" value="<s:property value="fileFileName" />">
+                                                                <input type="submit"  value='Download'>                                                                
+                                                            </form>
+                                                                <s:url action="descarga" includeContext="false"><s:param name="fn" value="george"/></s:url>
+                                                                <a href="<s:url action="%{descargaUrl}"/>"> <i class='fa fa-download'></i></a>
+                                                            
+                                                        </td> 
+                                                        <td><i class="fa fa-share-alt"></i></td>  
                                                     </tr>
                                                 </s:iterator>
                                             </tbody>

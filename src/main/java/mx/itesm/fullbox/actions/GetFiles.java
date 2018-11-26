@@ -10,6 +10,8 @@ import static com.opensymphony.xwork2.Action.SUCCESS;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.util.ValueStack;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -31,6 +33,26 @@ import org.apache.struts2.convention.annotation.Result;
 public class GetFiles extends ActionSupport { 
     private List<FileUpload> list = new ArrayList<FileUpload>();  
     private String your_email;
+    private InputStream fileInputStream;
+    private String fn; 
+
+    public InputStream getFileInputStream() {
+        return fileInputStream;
+    }
+
+    public void setFileInputStream(InputStream fileInputStream) {
+        this.fileInputStream = fileInputStream;
+    }
+
+    public String getFn() {
+        return fn;
+    }
+
+    public void setFn(String fn) {
+        this.fn = fn;
+    }
+    
+    
 
     public String getYour_email() {
         return your_email;
@@ -67,6 +89,27 @@ public class GetFiles extends ActionSupport {
             System.out.println(ex.getMessage());
         }
         return ERROR; //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    public String download()
+    {
+        try {
+            System.out.print("ENTREEEEE");
+            Connection conn = Conexion.getConexion();
+            String sql = "SELECT contenido FROM archivo where nombre = ?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            System.out.print(fn);
+            ps.setString(1, fn);
+            ResultSet rs = ps.executeQuery(); 
+            if(rs.next()) {
+                System.out.print("ENTREEEEEEEEEEEE");
+                fileInputStream = rs.getBinaryStream("contenido");
+            }
+            return SUCCESS;
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+        return SUCCESS;
     }
     
 }

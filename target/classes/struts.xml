@@ -22,6 +22,14 @@
         <action name="myfile" class="mx.itesm.fullbox.actions.GetFiles" method="execute">
             <result name="success">/Login2.jsp</result>
         </action>
+        <action name="descarga" class="mx.itesm.fullbox.actions.GetFiles" method="download">
+            <result name="success" type="stream">
+                <param name="contentType">application/octet-stream</param>
+                <param name="inputName">fileInputStream</param>
+                <param name="contentDisposition">attachment;filename="${fn}</param>
+                <param name="bufferSize">1024</param>
+            </result>
+        </action>
         <action name="newfile">
             <result name="success">/Login.jsp</result>
         </action>

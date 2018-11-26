@@ -12,6 +12,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.util.ValueStack;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -33,6 +34,16 @@ public class FileUpload extends ActionSupport {
     private String fileContentType;
     private String fileFileName;
     private String your_email;
+    private InputStream contenido;
+
+    public InputStream getContenido() {
+        return contenido;
+    }
+
+    public void setContenido(InputStream contenido) {
+        this.contenido = contenido;
+    }
+    
 
     public String getYour_email() {
         return your_email;
@@ -93,6 +104,7 @@ System.out.print("ENTREEEEEEEEE");
                 ps.setString(3, FilenameUtils.getExtension(fileFileName));
                 ps.setLong(4, file.length());
                 FileInputStream is = new FileInputStream(file);
+                setContenido(is);
                 ps.setBinaryStream(5, is);
                 ps.setString(6, Long.toString(file.length()));
                 ps.setInt(7, id);
