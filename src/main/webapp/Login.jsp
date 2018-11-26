@@ -107,8 +107,11 @@
                                         <h4 class="title">Mis archivos</h4>
                                     </div>
                                     <div class="content">
+                                        <h1><s:property value="your_email"/></h1>
                                         <form action="fileup" method ="POST" class="dropzone" id="dropzone" enctype="multipart/form-data">
+                                             <input type="hidden"  name="your_email" value="<s:property value="your_email"/>">
                                             <div class="fallback">
+            
                                                 <s:file name="file" label="Select a File to upload" size="40" />
                                             </div>
                                         </form>

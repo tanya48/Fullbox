@@ -7,21 +7,17 @@ package mx.itesm.fullbox.actions;
 
 import static com.opensymphony.xwork2.Action.ERROR;
 import static com.opensymphony.xwork2.Action.SUCCESS;
-import com.opensymphony.xwork2.ActionContext;
-import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.ActionSupport;
-import com.opensymphony.xwork2.config.entities.Parameterizable;
-import com.opensymphony.xwork2.util.ValueStack;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.servlet.http.Part;
+import mx.itesm.fullbox.actions.Login;
 import mx.itesm.fullbox.utils.Conexion;
 import org.apache.commons.io.FilenameUtils;
 
@@ -34,8 +30,17 @@ public class FileUpload extends ActionSupport{
       private File file;
       private String fileContentType;
       private String fileFileName;
-      ValueStack vs;
+      private String your_email;
+     
+      
+    public String getYour_email() {
+        return your_email;
+    }
 
+    public void setYour_email(String your_email) {
+        this.your_email = your_email;
+    }
+      
     public File getFile() {
         return file;
     }
@@ -62,22 +67,20 @@ public class FileUpload extends ActionSupport{
 
     @Override
     public String execute() throws Exception {
-        System.out.print("ENTRE AL EXXXX");
+        
         try {
                 Connection conn = Conexion.getConexion();
                 String emailsql = "SELECT idcuenta FROM Cuenta WHERE email = ?";
                 PreparedStatement pss = conn.prepareStatement(emailsql);
-                vs = ActionContext.getContext().getValueStack();
-               
-                System.out.print(vs.size());
+                System.out.print("ENTRE AL ________");
+                System.out.print(your_email);
                 //pss.setString(1, log.getYour_email());
-                pss.setString(1, "A01422233@itesm.mx");
-                ResultSet rs = pss.executeQuery();  
-                
+                pss.setString(1, your_email);
+                ResultSet rs = pss.executeQuery();      
                 if (rs.next()) {
                     System.out.print("ENTRE AL FFFF");
                     int id = rs.getInt("idcuenta");
-                    String sql = "INSERT INTO archivo(nombre, tipo, extension, tamaño, contenido, fk_idcuenta) VALUES(?,?,?,?,?,?)";
+                    String sql = "INSERT INTO archivo(nombre, tipo, extension, tamaño, contenido, link, fk_idcuenta) VALUES(?,?,?,?,?,?,?)";
                     PreparedStatement ps = conn.prepareStatement(sql);
                     ps.setString(1, fileFileName);
                     ps.setString(2, fileContentType);
@@ -93,7 +96,7 @@ public class FileUpload extends ActionSupport{
                     return ERROR;
                 }
             } catch (Exception ex) {
-                Logger.getLogger(Registro.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(FileUpload.class.getName()).log(Level.SEVERE, null, ex);
             }
         return ERROR; //To change body of generated methods, choose Tools | Templates.
     }
