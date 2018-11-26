@@ -61,9 +61,15 @@
                     </div>
                     <ul class="nav">
                         <li class="active">
-                            <a href="dashboard.html">
+                            <a href="<s:url action='newfile'/>">
                                 <i class="pe-7s-graph"></i>
-                                <p>Dashboard</p>
+                                <p>New File</p>
+                            </a>
+                        </li>
+                        <li class="active">
+                            <a href="<s:url action='myfile'/>">
+                                <i class="pe-7s-graph"></i>
+                                <p>My Files</p>
                             </a>
                         </li>
                     </ul>
@@ -105,37 +111,16 @@
                                         <h4 class="title">New File</h4>
                                     </div>
                                     <div class="content">
-                                        <form action="fileup" method ="POST" class="dropzone" id="dropzone" enctype="multipart/form-data">
+                                        <form action="fileup" method="POST" class="dropzone" id="dropzone" enctype="multipart/form-data">
                                             <input type="hidden"  name="your_email" value="<s:property value="your_email"/>">
                                             <div class="fallback">
                                                 <s:file name="file" label="Select a File to upload" size="40" />
                                             </div>
                                         </form>
-
+                                          
                                     </div>
                                 </div>
-                            </div>
-                            <a onClick="addMoreRows()">Holaa</a>
-                            <div class="col-md-12">
-                                <div class="card">
-                                    <div class="header">
-                                        <h4 class="title">My Files</h4>
-                                    </div>
-                                    <div class="content">
-                                        <table id="fileTable" class="table table-hover">
-                                            <thead>
-                                                <tr>
-                                                    <th scope="col">Name</th>
-                                                    <th scope="col">Download</th>
-                                                    <th scope="col">Share</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
+                            </div>              
                         </div>
                     </div>
                 </div>

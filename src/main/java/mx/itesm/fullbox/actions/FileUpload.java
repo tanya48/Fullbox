@@ -68,7 +68,7 @@ public class FileUpload extends ActionSupport {
 
     @Override
     public String execute() throws Exception {
-
+        
         try {
             Connection conn = Conexion.getConexion();
             String emailsql = "SELECT idcuenta FROM Cuenta WHERE email = ?";
