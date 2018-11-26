@@ -61,13 +61,13 @@
                     </div>
                     <ul class="nav">
                         <li class="active">
-                            <a href="<s:url action='newfile'/>">
+                            <a href="<s:url action="newfile"/>">
                                 <i class="pe-7s-graph"></i>
                                 <p>New File</p>
                             </a>
                         </li>
                         <li class="active">
-                            <a href="<s:url action='myfile'/>">
+                            <a href="<s:url action="myfile"/>">
                                 <i class="pe-7s-graph"></i>
                                 <p>My Files</p>
                             </a>

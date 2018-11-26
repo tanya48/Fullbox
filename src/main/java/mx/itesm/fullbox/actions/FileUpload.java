@@ -73,10 +73,18 @@ public class FileUpload extends ActionSupport {
             Connection conn = Conexion.getConexion();
             String emailsql = "SELECT idcuenta FROM Cuenta WHERE email = ?";
             PreparedStatement pss = conn.prepareStatement(emailsql);
-            pss.setString(1, your_email);
+            if(your_email.isEmpty())
+            {
+                System.out.print("ENTREEE al 1");
+                pss.setString(1, "A0122091@itesm.mx");
+            }else{
+                System.out.print("ENT");
+                pss.setString(1, your_email);
+            }
+            
             ResultSet rs = pss.executeQuery();
             if (rs.next()){
-
+System.out.print("ENTREEEEEEEEE");
                 int id = rs.getInt("idcuenta");
                 String sql = "INSERT INTO archivo(nombre, tipo, extension, tamaño, contenido, link, fk_idcuenta) VALUES(?,?,?,?,?,SHA(?),?)";
                 PreparedStatement ps = conn.prepareStatement(sql);

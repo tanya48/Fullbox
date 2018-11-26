@@ -30,6 +30,15 @@ import org.apache.struts2.convention.annotation.Result;
  */
 public class GetFiles extends ActionSupport { 
     private List<FileUpload> list = new ArrayList<FileUpload>();  
+    private String your_email;
+
+    public String getYour_email() {
+        return your_email;
+    }
+
+    public void setYour_email(String your_email) {
+        this.your_email = your_email;
+    }
     
     public List<FileUpload> getList() {
         return list;
@@ -40,7 +49,6 @@ public class GetFiles extends ActionSupport {
     }
     @Override
     public String execute() throws Exception {
-
         try {
             Connection conn = Conexion.getConexion();
             String sql = "SELECT nombre FROM archivo";
