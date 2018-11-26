@@ -5,13 +5,17 @@
  */
 package mx.itesm.fullbox.actions;
 
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+import com.opensymphony.xwork2.util.ValueStack;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -23,7 +27,16 @@ import mx.itesm.fullbox.utils.Conexion;
  */
 public class Login extends ActionSupport {
     String your_email, your_pass;
+    Map param;
 
+    public Map getParam() {
+        return param;
+    }
+
+    public void setParam(Map param) {
+        this.param = param;
+    }
+    
     public String getYour_email() {
         return your_email;
     }
@@ -46,6 +59,10 @@ public class Login extends ActionSupport {
         try {
             Connection conn = Conexion.getConexion();
             PreparedStatement ps = conn.prepareStatement(sql);
+            ValueStack vs = ActionContext.getContext().getValueStack();
+            param = new HashMap();
+            param.put("ymail", your_email);
+            vs.push(param);
             ps.setString(1, your_email);
             ps.setString(2, your_pass);
             ResultSet rs = ps.executeQuery();

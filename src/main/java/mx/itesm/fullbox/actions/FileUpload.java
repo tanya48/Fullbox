@@ -7,8 +7,11 @@ package mx.itesm.fullbox.actions;
 
 import static com.opensymphony.xwork2.Action.ERROR;
 import static com.opensymphony.xwork2.Action.SUCCESS;
+import com.opensymphony.xwork2.ActionContext;
+import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.config.entities.Parameterizable;
+import com.opensymphony.xwork2.util.ValueStack;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
@@ -31,27 +34,7 @@ public class FileUpload extends ActionSupport{
       private File file;
       private String fileContentType;
       private String fileFileName;
-      private int fileFileSize;
-      private String fileFileType;
-      private String your_email;
-
-    public String getFileFileType() {
-        return fileFileType;
-    }
-
-    public void setFileFileType(String fileFileType) {
-        this.fileFileType = fileFileType;
-    }
-
-    public String getYour_email() {
-        return your_email;
-    }
-
-    public void setYour_email(String your_email) {
-        this.your_email = your_email;
-    }
-      
-      
+      ValueStack vs;
 
     public File getFile() {
         return file;
@@ -77,31 +60,24 @@ public class FileUpload extends ActionSupport{
         this.fileFileName = fileFileName;
     }
 
-    public int getFileFileSize() {
-        return fileFileSize;
-    }
-
-    public void setFileFileSize(int fileFileSize) {
-        this.fileFileSize = fileFileSize;
-    }
     @Override
     public String execute() throws Exception {
         System.out.print("ENTRE AL EXXXX");
         try {
-            
                 Connection conn = Conexion.getConexion();
                 String emailsql = "SELECT idcuenta FROM Cuenta WHERE email = ?";
                 PreparedStatement pss = conn.prepareStatement(emailsql);
-                Login log = new Login();
-                System.out.print(your_email);
+                vs = ActionContext.getContext().getValueStack();
+               
+                System.out.print(vs.size());
                 //pss.setString(1, log.getYour_email());
-                pss.setString(1, "A0122091@itesm.mx");
-                ResultSet rs = pss.executeQuery();
+                pss.setString(1, "A01422233@itesm.mx");
+                ResultSet rs = pss.executeQuery();  
                 
                 if (rs.next()) {
                     System.out.print("ENTRE AL FFFF");
                     int id = rs.getInt("idcuenta");
-                    String sql = "INSERT INTO archivo(nombre, tipo, extension, tamaño, contenido, fk_idfolder, fk_idcuenta) VALUES(?,?,?,?,?,?,?)";
+                    String sql = "INSERT INTO archivo(nombre, tipo, extension, tamaño, contenido, fk_idcuenta) VALUES(?,?,?,?,?,?)";
                     PreparedStatement ps = conn.prepareStatement(sql);
                     ps.setString(1, fileFileName);
                     ps.setString(2, fileContentType);
@@ -109,8 +85,7 @@ public class FileUpload extends ActionSupport{
                     ps.setLong(4, file.length());
                     FileInputStream is = new FileInputStream(file);
                     ps.setBinaryStream(5, is);
-                    ps.setInt(6, 1);
-                    ps.setInt(7, id);
+                    ps.setInt(6, id);
                     ps.execute();
                     //el binaryStream almacena bytes, con java obtienes el inputstream.
                     return SUCCESS;
