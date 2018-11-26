@@ -42,7 +42,6 @@
 
         <!-- Main css -->
         <link rel="stylesheet" href="css/style.css">
-
     </head>
     <body>
 
@@ -81,7 +80,6 @@
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
                             </button>
-                            <a class="navbar-brand" href="#">Mi unidad</a>
                         </div>
                         <div class="collapse navbar-collapse">
                             <ul class="nav navbar-nav navbar-right">
@@ -100,21 +98,41 @@
 
                 <div class="content">
                     <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-md-8">
+                        <div class="row" >
+                            <div class="col-md-8" >
                                 <div class="card">
                                     <div class="header">
-                                        <h4 class="title">Mis archivos</h4>
+                                        <h4 class="title">New File</h4>
                                     </div>
                                     <div class="content">
-                                        <h1><s:property value="your_email"/></h1>
                                         <form action="fileup" method ="POST" class="dropzone" id="dropzone" enctype="multipart/form-data">
-                                             <input type="hidden"  name="your_email" value="<s:property value="your_email"/>">
+                                            <input type="hidden"  name="your_email" value="<s:property value="your_email"/>">
                                             <div class="fallback">
-            
                                                 <s:file name="file" label="Select a File to upload" size="40" />
                                             </div>
                                         </form>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <a onClick="addMoreRows()">Holaa</a>
+                            <div class="col-md-12">
+                                <div class="card">
+                                    <div class="header">
+                                        <h4 class="title">My Files</h4>
+                                    </div>
+                                    <div class="content">
+                                        <table id="fileTable" class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">Name</th>
+                                                    <th scope="col">Download</th>
+                                                    <th scope="col">Share</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
                             </div>
@@ -161,20 +179,29 @@
 
     <!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
     <script src="js/demo.js"></script>
-
     <script type="text/javascript">
-                                $(document).ready(function () {
-                                    demo.initChartist();
-                                    $.notify({
-                                        icon: 'pe-7s-gift',
-                                        message: "Welcome to your <b>Fullbox Drive</b>."
+        $(document).ready(function () {
+            demo.initChartist();
+            $.notify({
+                icon: 'pe-7s-gift',
+                message: "Welcome to your <b>Fullbox Drive</b>."
 
-                                    }, {
-                                        type: 'info',
-                                        timer: 4000
-                                    });
+            }, {
+                type: 'info',
+                timer: 4000
+            });
 
-                                });
+        });
+        function addMoreRows() {
+            var rows = "";
+
+        rows += "<tr><td>" + '<s:property value="value1"/>' + "</td><td>" + 'hola' + "</td><td>" + 'hola' + "</td></tr>";
+            $(rows).appendTo("#fileTable tbody");
+
+        }
+
     </script>
+
+
 </html>
 
